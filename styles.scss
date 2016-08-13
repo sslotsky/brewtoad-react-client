@@ -1,0 +1,11 @@
+$alert-danger: rgb(202, 60, 60);
+
+form.pure-form-brewed {
+  div.has-error {
+    color: $alert-danger;
+
+    input, input:focus {
+      border-color: $alert-danger;
+    }
+  }
+}
