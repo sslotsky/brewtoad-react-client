@@ -4,21 +4,26 @@ import { connect } from 'react-redux'
 import * as actions from './actions'
 
 export class New extends Component {
+  static propTypes = {
+    user: PropTypes.object.isRequired
+  }
+
   submit(data) {
-    console.log(data)
-    //this.props.create(this.username.value, this.email.value, this.password.value)
+    this.props.create(data.username, data.email, data.password)
   }
 
   render() {
     return (
       <div>
-        <Form onSubmit={::this.submit} />
+        <Form initialValues={this.props.user.toJS()} onSubmit={::this.submit} />
       </div>
     )
   }
 }
 
 export default connect(
-  () => ({}),
+  state => ({
+    user: state.users.get('user')
+  }),
   { create: actions.register }
 )(New)

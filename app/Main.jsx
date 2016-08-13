@@ -7,12 +7,13 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 
 import { Router, browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import routes from './Routes'
 
 import '../styles.scss'
 
-const store = createStore(reducers, applyMiddleware(thunk))
+const router = routerMiddleware(browserHistory)
+const store = createStore(reducers, applyMiddleware(thunk, router))
 const history = syncHistoryWithStore(browserHistory, store)
 
 ReactDOM.render((
