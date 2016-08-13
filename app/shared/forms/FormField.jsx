@@ -21,7 +21,13 @@ export default class FormField extends Component {
     ) : false
     const child = React.cloneElement(children, { id: field.name })
     const error = displayError ? (
-      <span>{field.error}</span>
+      <ul>
+        {
+          field.error.map((e, i) => (
+            <li key={`error-${i}`}>{e}</li>
+          ))
+        }
+      </ul>
     ) : false
 
     return (

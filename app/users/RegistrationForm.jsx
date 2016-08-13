@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react'
-import { Input } from '../shared/forms'
+import { Input, SaveButton, buildErrors } from '../shared/forms'
 import { reduxForm } from 'redux-form'
-import emailValidator from 'email-validator'
 
 class Form extends Component {
   static propTypes = {
@@ -24,24 +23,20 @@ class Form extends Component {
       <form onSubmit={handleSubmit} className="pure-form pure-form-stacked pure-form-brewed">
         <Input field={username} placeholder="UserName" />
         <Input field={email} placeholder="Email" />
-        <input type="password" placeholder="Password" ref={(node) => this.password = node} />
-        <input
-          type="submit"
-          className="pure-button pure-button-primary"
-          value="Register"
-        />
+        <Input field={password} type="password" placeholder="Password" />
+        <Input field={passwordConfirmation} type="password" placeholder="Confirm Password" />
+        <SaveButton {...this.props} label="Register" />
       </form>
     )
   }
 }
 
 function validate(values) {
-  const errors = {};
-  if (!emailValidator.validate(values.email)) {
-    errors.email = "Please enter a valid email address"
-  }
-
-  return errors;
+  return buildErrors(values, v => {
+    v.require('username', 'email', 'password', 'passwordConfirmation'),
+    v.email('email'),
+    v.matchesField('passwordConfirmation', 'password', 'Does not match Password')
+  });
 }
 
 export default reduxForm({
