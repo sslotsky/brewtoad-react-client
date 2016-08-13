@@ -16,6 +16,9 @@ module.exports = {
       exclude: /node_modules/
     }]
   },
+  devServer: {
+    historyApiFallback: true
+  },
   plugins: [
     new BrowserSyncPlugin({
       host: 'localhost',
