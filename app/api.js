@@ -23,5 +23,10 @@ export default {
           password
         }
       }),
+  },
+  recipes: {
+    index: (filters={}) => {
+      return api().get('/recipes', { params: { ...filters } })
+    }
   }
 }

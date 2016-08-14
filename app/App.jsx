@@ -13,6 +13,8 @@ export default class App extends Component {
         <Link to="/users/new">Create New User</Link>
         &nbsp;
         <Link to="/">Home</Link>
+        &nbsp;
+        <Link to="/recipes">Recipes</Link>
         {this.props.children}
       </div>
     );
