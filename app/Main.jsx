@@ -11,7 +11,7 @@ import { Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 import routes from './Routes'
 
-import '../styles.scss'
+import 'ROOT/styles.scss'
 
 const router = routerMiddleware(browserHistory)
 const store = createStore(reducers, applyMiddleware(thunk, router))

@@ -1,6 +1,5 @@
 import Immutable, { Map, List } from 'immutable'
-// TODO: path aliasing NOW!!
-import { resolveEach, updateListItem } from '../../lib/reduxResolver'
+import { resolveEach, updateListItem } from 'LIB/reduxResolver'
 import * as actionTypes from './actionTypes'
 
 const initialState = List()

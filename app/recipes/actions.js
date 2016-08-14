@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes'
-import api from '../api'
+import api from 'APP/api'
 
 export function fetchRecipes(pageInfo) {
   return dispatch => {

@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import { Input, SaveButton, buildErrors } from '../shared/forms'
+import { Input, SaveButton, buildErrors } from 'APP/shared/forms'
 import { reduxForm } from 'redux-form'
 
 class Form extends Component {

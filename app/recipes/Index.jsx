@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
-import Next from '../pagination/Next'
-import Prev from '../pagination/Prev'
+import Next from 'APP/pagination/Next'
+import Prev from 'APP/pagination/Prev'
 
 import * as actions from './actions'
 import { bindActionCreators } from 'redux'
