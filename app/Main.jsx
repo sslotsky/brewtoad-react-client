@@ -13,9 +13,17 @@ import routes from './Routes'
 
 import 'ROOT/styles.scss'
 
+import { loadTranslations, setLocale, syncTranslationWithStore } from 'react-redux-i18n'
+import translations from 'CONFIG/locales'
+
 const router = routerMiddleware(browserHistory)
 const store = createStore(reducers, applyMiddleware(thunk, router))
 const history = syncHistoryWithStore(browserHistory, store)
+
+syncTranslationWithStore(store)
+store.dispatch(loadTranslations(translations))
+store.dispatch(setLocale('en')) // TODO: resolve dynamically
+
 
 ReactDOM.render((
   <Provider store={store}>

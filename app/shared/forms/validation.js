@@ -4,20 +4,20 @@ import 'babel-regenerator-runtime'
 
 function* required(value) {
   if (!value) {
-    yield 'Required'
+    yield 'validation.required'
   }
 }
 
 function* email(value) {
   if (value && !emailValidator.validate(value)) {
-    yield 'Please enter a valid email address'
+    yield 'validation.email'
   }
 }
 
-function matches(fieldName, message = 'Does not match') {
+function matches(fieldName, key = 'validation.matches') {
   return function* matchesField(value, data) {
     if (data && value && value !== data[fieldName]) {
-      yield message
+      yield key
     }
   }
 }
