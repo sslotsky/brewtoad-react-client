@@ -9,10 +9,10 @@ export default {
       username: 'UserName',
       email: 'Email',
       password: 'Password',
-      passwordConfirmation: 'Confirm Password',
+      password_confirmation: 'Confirm Password',
       register: 'Register',
       validation: {
-        passwordConfirmation: {
+        password_confirmation: {
           matches: "Passwords don't match"
         }
       }

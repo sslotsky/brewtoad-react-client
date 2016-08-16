@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react'
+import { t } from './index'
 import classnames from 'classnames'
 
 export default class FormField extends Component {
@@ -24,7 +25,7 @@ export default class FormField extends Component {
       <ul>
         {
           field.error.map((e, i) => (
-            <li key={`error-${i}`}>{e}</li>
+            <li key={`error-${i}`}>{t(e)}</li>
           ))
         }
       </ul>

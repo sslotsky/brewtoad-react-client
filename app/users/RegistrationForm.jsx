@@ -20,7 +20,7 @@ class Form extends Component {
         username,
         email,
         password,
-        passwordConfirmation
+        password_confirmation
       }
     } = this.props
 
@@ -29,7 +29,7 @@ class Form extends Component {
         <Input field={username} placeholder={this.label(username)} />
         <Input field={email} placeholder={this.label(email)} />
         <Input field={password} type="password" placeholder={this.label(password)} />
-        <Input field={passwordConfirmation} type="password" placeholder={this.label(passwordConfirmation)} />
+        <Input field={password_confirmation} type="password" placeholder={this.label(password_confirmation)} />
         <SaveButton {...this.props} label={I18n.t('users.form.register')} />
       </form>
     )
@@ -38,9 +38,9 @@ class Form extends Component {
 
 function validate(values) {
   return buildErrors(values, v => {
-    v.require('username', 'email', 'password', 'passwordConfirmation'),
+    v.require('username', 'email', 'password', 'password_confirmation'),
     v.email('email'),
-    v.matchesField('passwordConfirmation', 'password', 'Does not match Password')
+    v.matchesField('password_confirmation', 'password', 'users.form.validation.password_confirmation.matches')
   });
 }
 
@@ -50,7 +50,7 @@ export default reduxForm({
     'username',
     'email',
     'password',
-    'passwordConfirmation'
+    'password_confirmation'
   ],
   validate
 })(Form)
