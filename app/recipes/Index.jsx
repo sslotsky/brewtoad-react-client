@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import Next from 'APP/pagination/Next'
-import Prev from 'APP/pagination/Prev'
+import Flipper from 'APP/pagination/Flipper'
 
 import * as actions from './actions'
 import { bindActionCreators } from 'redux'
@@ -15,16 +14,7 @@ export class Index extends Component {
     const { actions } = this.props
 
     return (
-      <div>
-        <Prev
-          listId="recipes"
-          fetch={actions.fetchRecipes}
-        />
-        <Next
-          listId="recipes"
-          fetch={actions.fetchRecipes}
-        />
-      </div>
+      <Flipper listId="recipes" fetch={actions.fetchRecipes} />
     )
   }
 }
