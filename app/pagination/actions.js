@@ -8,8 +8,10 @@ const defaultConfig = {
 const fetcher = customConfig =>
   (dispatch, getState) => {
     const config = { ...defaultConfig, ...customConfig }
-    dispatch({ type: actionTypes.FETCH_RECORDS })
-    const pageInfo = getState().pagination.find(p => p.get('id') === config.listId)
+    const id = config.listId
+    const pageInfo = getState().pagination.find(p => p.get('id') === id)
+
+    dispatch({ type: actionTypes.FETCH_RECORDS, id })
 
     /* Assumes config.fetch is already bound to dispatch:
      *
@@ -26,12 +28,14 @@ const fetcher = customConfig =>
       dispatch({
         type: actionTypes.RESULTS_UPDATED,
         results: resp.data[config.results],
-        totalCount: resp.data[config.totalCount]
+        totalCount: resp.data[config.totalCount],
+        id
       })
     ).catch(error =>
       dispatch({
         type: actionTypes.RESULTS_UPDATED_ERROR,
-        error
+        error,
+        id
       })
     )
   }

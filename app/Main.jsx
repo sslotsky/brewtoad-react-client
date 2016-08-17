@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import thunk from 'redux-thunk'
 import reducers from './reducers'
-import { createStore, applyMiddleware } from 'redux'
+import { compose, createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import ReduxToastr from 'react-redux-toastr'
 
@@ -18,7 +18,11 @@ import translations from 'CONFIG/locales'
 import { setTranslator, t } from 'APP/shared/forms'
 
 const router = routerMiddleware(browserHistory)
-const store = createStore(reducers, applyMiddleware(thunk, router))
+const devtools = window.devToolsExtension ? window.devToolsExtension() : f => f
+const store = createStore(
+  reducers,
+  compose(applyMiddleware(thunk, router), devtools)
+)
 const history = syncHistoryWithStore(browserHistory, store)
 
 syncTranslationWithStore(store)

@@ -10,7 +10,8 @@ const defaultPaginator = Map({
   pageSize: 15,
   totalCount: 0,
   isLoading: false,
-  results: List()
+  results: List(),
+  loadError: null
 })
 
 function initialize(state, action) {
@@ -33,14 +34,36 @@ function prev(state, action) {
   )
 }
 
+function fetching(state, action) {
+  return updateListItem(state, action.id, p =>
+    p.merge({ isLoading: true })
+  )
+}
+
 function updateResults(state, action) {
   return updateListItem(state, action.id, p =>
-    p.merge({ results: Immutable.fromJS(action.results), totalCount: action.totalCount })
+    p.merge({
+      results: Immutable.fromJS(action.results),
+      totalCount: action.totalCount,
+      isLoading: false
+    })
+  )
+}
+
+function error(state, action) {
+  return updateListItem(state, action.id, p =>
+    p.merge({
+      isLoading: false,
+      loadError: action.error
+    })
   )
 }
 
 export default resolveEach(initialState, {
   [actionTypes.INITIALIZE_PAGINATOR]: initialize,
   [actionTypes.PREVIOUS_PAGE]: prev,
-  [actionTypes.NEXT_PAGE]: next
+  [actionTypes.NEXT_PAGE]: next,
+  [actionTypes.FETCH_RECORDS]: fetching,
+  [actionTypes.RESULTS_UPDATED]: updateResults,
+  [actionTypes.RESULTS_UPDATED_ERROR]: error
 })
