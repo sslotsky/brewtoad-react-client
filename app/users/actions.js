@@ -12,8 +12,8 @@ export function register(username, email, password) {
       toastr.success('Saved!', `User ${resp.data.username} created!`)
       return dispatch({ type: actionTypes.NEW_USER_CREATED, user: resp.data })
     }).catch(error => {
-      toastr.error('UserName or Email already taken')
-      return dispatch({ type: actionTypes.NEW_USER_CREATED_ERROR, error: error })
+      toastr.error('Could not create user!')
+      return dispatch({ type: actionTypes.NEW_USER_CREATED_ERROR, serverErrors: error.response.data.errors })
     })
   }
 }

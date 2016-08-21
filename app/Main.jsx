@@ -33,7 +33,7 @@ setTranslator(I18n)
 ReactDOM.render((
   <Provider store={store}>
     <div>
-      <ReduxToastr timeout={600000} />
+      <ReduxToastr />
       <Router history={history}>
         {routes}
       </Router>

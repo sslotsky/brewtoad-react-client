@@ -15,7 +15,11 @@ export class New extends Component {
   render() {
     return (
       <div>
-        <Form initialValues={this.props.user.toJS()} onSubmit={::this.submit} />
+        <Form
+          {...this.props}
+          initialValues={this.props.user.toJS()}
+          onSubmit={::this.submit}
+        />
       </div>
     )
   }
@@ -23,7 +27,8 @@ export class New extends Component {
 
 export default connect(
   state => ({
-    user: state.users.get('user')
+    user: state.users.get('user'),
+    serverErrors: state.users.get('serverErrors')
   }),
   { create: actions.register }
 )(New)

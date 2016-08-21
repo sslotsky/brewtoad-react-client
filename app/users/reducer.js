@@ -1,21 +1,22 @@
-import { Map } from 'immutable'
+import Immutable, { Map } from 'immutable'
 import * as actionTypes from './actionTypes'
 import { resolveAll } from 'LIB/reduxResolver'
 
 const initialState = Map({
   saving: false,
   user: Map(),
-  error: null
+  serverErrors: Map()
 })
 
 export default resolveAll(initialState, (state, action) => ({
   [actionTypes.SUBMIT_NEW_USER]: () => state.merge({ saving: true }),
   [actionTypes.NEW_USER_CREATED]: () => state.merge({
     user: Map(action.user),
-    saving: false
+    saving: false,
+    serverErrors: Map()
   }),
   [actionTypes.NEW_USER_CREATED_ERROR]: () => state.merge({
     saving: false,
-    error: action.error
+    serverErrors: Immutable.fromJS(action.serverErrors)
   })
 }))

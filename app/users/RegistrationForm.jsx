@@ -1,12 +1,13 @@
 import React, { PropTypes, Component } from 'react'
-import { Input, SaveButton, buildErrors } from 'APP/shared/forms'
+import { Input, SaveButton, Form, buildErrors } from 'APP/shared/forms'
 import { I18n } from 'react-redux-i18n'
 import { reduxForm } from 'redux-form'
 
-class Form extends Component {
+class RegistrationForm extends Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    handleSubmit: PropTypes.func.isRequired,
+    serverErrors: PropTypes.object
   }
 
   label(field) {
@@ -15,23 +16,23 @@ class Form extends Component {
 
   render() {
     const {
-      handleSubmit,
       fields: {
         username,
         email,
         password,
         password_confirmation
-      }
+      },
+      ...rest
     } = this.props
 
     return (
-      <form onSubmit={handleSubmit} className="pure-form pure-form-stacked pure-form-brewed">
+      <Form {...rest} translationPrefix="users.form" className="pure-form pure-form-stacked pure-form-brewed">
         <Input field={username} placeholder={this.label(username)} />
         <Input field={email} placeholder={this.label(email)} />
         <Input field={password} type="password" placeholder={this.label(password)} />
         <Input field={password_confirmation} type="password" placeholder={this.label(password_confirmation)} />
         <SaveButton {...this.props} label={I18n.t('users.form.register')} />
-      </form>
+      </Form>
     )
   }
 }
@@ -53,4 +54,4 @@ export default reduxForm({
     'password_confirmation'
   ],
   validate
-})(Form)
+})(RegistrationForm )

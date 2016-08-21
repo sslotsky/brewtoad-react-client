@@ -14,6 +14,12 @@ export default {
       validation: {
         password_confirmation: {
           matches: "Passwords don't match"
+        },
+        email: {
+          taken: "Email address already taken"
+        },
+        username: {
+          taken: "UserName already taken"
         }
       }
     }
