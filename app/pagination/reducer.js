@@ -1,17 +1,18 @@
-import Immutable, { Map, List } from 'immutable'
+import Immutable, { Map, List, Set } from 'immutable'
 import { resolveEach, updateListItem } from 'LIB/reduxResolver'
 import * as actionTypes from './actionTypes'
 
 const initialState = List()
 
-const defaultPaginator = Map({
+export const defaultPaginator = Map({
   id: null,
   page: 1,
   pageSize: 15,
   totalCount: 0,
   isLoading: false,
   results: List(),
-  loadError: null
+  loadError: null,
+  filters: Map()
 })
 
 function initialize(state, action) {
@@ -19,7 +20,8 @@ function initialize(state, action) {
     return state
   }
 
-  return state.push(defaultPaginator.merge({ id: action.id }))
+  const { type: _, ...rest } = action
+  return state.push(defaultPaginator.merge({ ...rest }))
 }
 
 function next(state, action) {
@@ -50,6 +52,18 @@ function updateResults(state, action) {
   )
 }
 
+function toggleFilterItem(state, action) {
+  return updateListItem(state, action.id, p => {
+    const items = (p.getIn(['filters', action.field]) || Set()).toSet()
+    debugger
+    if (items.includes(action.value)) {
+      return p.setIn(['filters', action.field], items.delete(action.value))
+    } else {
+      return p.setIn(['filters', action.field], items.add(action.value))
+    }
+  })
+}
+
 function error(state, action) {
   return updateListItem(state, action.id, p =>
     p.merge({
@@ -65,5 +79,6 @@ export default resolveEach(initialState, {
   [actionTypes.NEXT_PAGE]: next,
   [actionTypes.FETCH_RECORDS]: fetching,
   [actionTypes.RESULTS_UPDATED]: updateResults,
-  [actionTypes.RESULTS_UPDATED_ERROR]: error
+  [actionTypes.RESULTS_UPDATED_ERROR]: error,
+  [actionTypes.TOGGLE_FILTER_ITEM]: toggleFilterItem
 })

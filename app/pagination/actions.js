@@ -74,6 +74,15 @@ export function register(config) {
           type: actionTypes.PREVIOUS_PAGE,
           id
         })
+      ),
+    toggleFilterItem: (field, value) => dispatch =>
+      dispatch(
+        execute({
+          type: actionTypes.TOGGLE_FILTER_ITEM,
+          id,
+          field,
+          value
+        })
       )
   }
 }
