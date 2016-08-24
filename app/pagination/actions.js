@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes'
+import { translate } from './pageInfoTranslator'
 
 const defaultConfig = {
   results: 'results',
@@ -15,16 +16,31 @@ const fetcher = customConfig =>
 
     /* Assumes config.fetch is already bound to dispatch:
      *
+     *
+     * export class Index extends Component {
+     *   static propTypes = {
+     *     actions: PropTypes.object.isRequired
+     *   }
+     *
+     *   render() {
+     *     const { actions } = this.props
+     *
+     *     return (
+     *       <Flipper listId="recipes" fetch={actions.fetchRecipes} />
+     *     )
+     *   }
+     * }
+     *
      * export default connect(
-     *   (state, ownProps) => ({
-     *     paginator: state.pagination.find(p => p.get('id') === ownProps.listId)
-     *   }),
-     *   (dispatch, ownProps) => ({
-     *     actions: bindActionCreators(register(ownProps), dispatch)
+     *   () => ({}),
+     *   dispatch => ({
+     *     actions: bindActionCreators(actions, dispatch)
      *   })
-     * )(Next)
+     * )(Index)
+     *
+     *
      */
-    return config.fetch(pageInfo.toJS()).then(resp =>
+    return config.fetch(translate(pageInfo)).then(resp =>
       dispatch({
         type: actionTypes.RESULTS_UPDATED,
         results: resp.data[config.results],
@@ -61,6 +77,7 @@ export function register(config) {
         dispatch(execute(action))
       }
     },
+    reload: fetch,
     next: () => dispatch =>
       dispatch(
         execute({
@@ -79,6 +96,15 @@ export function register(config) {
       dispatch(
         execute({
           type: actionTypes.TOGGLE_FILTER_ITEM,
+          id,
+          field,
+          value
+        })
+      ),
+    setFilter: (field, value) => dispatch =>
+      dispatch(
+        execute({
+          type: actionTypes.SET_FILTER,
           id,
           field,
           value

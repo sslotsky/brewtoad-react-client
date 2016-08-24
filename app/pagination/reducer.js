@@ -55,13 +55,18 @@ function updateResults(state, action) {
 function toggleFilterItem(state, action) {
   return updateListItem(state, action.id, p => {
     const items = (p.getIn(['filters', action.field]) || Set()).toSet()
-    debugger
     if (items.includes(action.value)) {
       return p.setIn(['filters', action.field], items.delete(action.value))
     } else {
       return p.setIn(['filters', action.field], items.add(action.value))
     }
   })
+}
+
+function setFilter(state, action) {
+  return updateListItem(state, action.id, p =>
+    p.setIn(['filters', action.field], Immutable.fromJS(action.value))
+  )
 }
 
 function error(state, action) {
@@ -80,5 +85,6 @@ export default resolveEach(initialState, {
   [actionTypes.FETCH_RECORDS]: fetching,
   [actionTypes.RESULTS_UPDATED]: updateResults,
   [actionTypes.RESULTS_UPDATED_ERROR]: error,
-  [actionTypes.TOGGLE_FILTER_ITEM]: toggleFilterItem
+  [actionTypes.TOGGLE_FILTER_ITEM]: toggleFilterItem,
+  [actionTypes.SET_FILTER]: setFilter
 })

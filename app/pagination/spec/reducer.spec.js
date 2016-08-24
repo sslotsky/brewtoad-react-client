@@ -19,6 +19,21 @@ function setup(testPaginator=Map()) {
 
 describe('pagination reducer', () => {
   context('when a list is initialized', () => {
+    it('handles SET_FILTER', () => {
+      const { state: initialState } = setup()
+      const field = 'foo'
+      const value = { eq: 'bar' }
+      const action = {
+        type: actionTypes.SET_FILTER,
+        field,
+        value,
+        id
+      }
+
+      const state = reducer(initialState, action).find(p => p.get('id') === id)
+      expect(state.getIn(['filters', field]).toJS()).toEqual(value)
+    })
+
     context('and a filter item exists', () => {
       const paginator = defaultPaginator.setIn(['filters', 'myArray'], Set.of('myItem'))
       const { state: initialState } = setup(paginator)

@@ -16,6 +16,9 @@ import 'ROOT/styles.scss'
 import { loadTranslations, setLocale, syncTranslationWithStore, I18n } from 'react-redux-i18n'
 import translations from 'CONFIG/locales'
 import { setTranslator, t } from 'APP/shared/forms'
+import { configurePageParams } from 'APP/pagination/pageInfoTranslator'
+
+configurePageParams({ perPage: 'results_per_page' })
 
 const router = routerMiddleware(browserHistory)
 const devtools = window.devToolsExtension ? window.devToolsExtension() : f => f
