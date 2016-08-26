@@ -9,6 +9,8 @@ export const defaultPaginator = Map({
   page: 1,
   pageSize: 15,
   totalCount: 0,
+  sort: null,
+  sortReverse: false,
   isLoading: false,
   results: List(),
   loadError: null,
@@ -55,6 +57,7 @@ function updateResults(state, action) {
 function toggleFilterItem(state, action) {
   return updateListItem(state, action.id, p => {
     const items = (p.getIn(['filters', action.field]) || Set()).toSet()
+    p.set('page', 1)
     if (items.includes(action.value)) {
       return p.setIn(['filters', action.field], items.delete(action.value))
     } else {
@@ -65,7 +68,16 @@ function toggleFilterItem(state, action) {
 
 function setFilter(state, action) {
   return updateListItem(state, action.id, p =>
-    p.setIn(['filters', action.field], Immutable.fromJS(action.value))
+    p.setIn(['filters', action.field], Immutable.fromJS(action.value)).
+      set('page', 1)
+  )
+}
+
+function sortChanged(state, action) {
+  return updateListItem(state, action.id, p =>
+    p.set('sort', action.field).
+      set('sortReverse', action.reverse).
+      set('page', 1)
   )
 }
 
@@ -86,5 +98,6 @@ export default resolveEach(initialState, {
   [actionTypes.RESULTS_UPDATED]: updateResults,
   [actionTypes.RESULTS_UPDATED_ERROR]: error,
   [actionTypes.TOGGLE_FILTER_ITEM]: toggleFilterItem,
-  [actionTypes.SET_FILTER]: setFilter
+  [actionTypes.SET_FILTER]: setFilter,
+  [actionTypes.SORT_CHANGED]: sortChanged
 })

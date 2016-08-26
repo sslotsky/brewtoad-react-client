@@ -18,7 +18,11 @@ import translations from 'CONFIG/locales'
 import { setTranslator, t } from 'APP/shared/forms'
 import { configurePageParams } from 'APP/pagination/pageInfoTranslator'
 
-configurePageParams({ perPage: 'results_per_page' })
+configurePageParams({
+  perPage: 'results_per_page',
+  sortOrder: 'sort_reverse',
+  sortReverse: true
+})
 
 const router = routerMiddleware(browserHistory)
 const devtools = window.devToolsExtension ? window.devToolsExtension() : f => f

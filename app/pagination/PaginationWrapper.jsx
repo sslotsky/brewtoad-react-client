@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import { register } from './actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import { defaultPaginator } from './reducer'
 
 const connector = connect(
   (state, ownProps) => ({
@@ -16,15 +17,31 @@ export default function paginate(ComponentClass) {
   return connector(
     class extends Component {
       static propTypes = {
-        actions: PropTypes.object.isRequired
+        actions: PropTypes.object.isRequired,
+        paginator: PropTypes.object
+      }
+
+      static defaultProps = {
+        paginator: defaultPaginator
       }
 
       componentDidMount() {
         this.props.actions.initialize()
       }
 
+      info() {
+        const { paginator } = this.props
+        const totalPages =
+          Math.ceil(paginator.get('totalCount') / paginator.get('pageSize'))
+
+        return {
+          hasPreviousPage: paginator.get('page') > 1,
+          hasNextPage: paginator.get('page') < totalPages
+        }
+      }
+
       render() {
-        return <ComponentClass {...this.props} />
+        return <ComponentClass {...this.props} {...this.info()} />
       }
     }
   )

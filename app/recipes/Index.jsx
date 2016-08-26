@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import Flipper from 'APP/pagination/Flipper'
+import SortLink from 'APP/pagination/SortLink'
 
 import * as actions from './actions'
 import { bindActionCreators } from 'redux'
@@ -14,7 +15,15 @@ export class Index extends Component {
     const { actions } = this.props
 
     return (
-      <Flipper listId="recipes" fetch={actions.fetchRecipes} />
+      <div>
+        <SortLink
+          listId="recipes"
+          fetch={actions.fetchRecipes}
+          field='name'
+          text='Name'
+        />
+        <Flipper listId="recipes" fetch={actions.fetchRecipes} />
+      </div>
     )
   }
 }

@@ -1,6 +1,24 @@
-let [pageParam, pageSizeParam] = ['page', 'pageSize']
+let [
+  pageParam,
+  pageSizeParam,
+  sortParam,
+  sortOrderParam,
+  useBooleanOrdering
+] = [
+  'page',
+  'pageSize',
+  'sort',
+  'sortOrder',
+  false
+]
 
-export function configurePageParams({ page, perPage }) {
+export function configurePageParams({
+  page,
+  perPage,
+  sort,
+  sortOrder,
+  sortReverse
+}) {
   if (page) {
     pageParam = page
   }
@@ -8,6 +26,35 @@ export function configurePageParams({ page, perPage }) {
   if (perPage) {
     pageSizeParam = perPage
   }
+
+  if (sort) {
+    sortParam = sort
+  }
+
+  if (sortOrder) {
+    sortOrderParam = sortOrder
+  }
+
+  useBooleanOrdering = !!sortReverse
+}
+
+function sortOrder(value) {
+  if (useBooleanOrdering) {
+    return value
+  }
+
+  return value ? 'desc' : 'asc'
+}
+
+function sortParams(paginator) {
+  if (paginator.get('sort')) {
+    return {
+      [sortParam]: paginator.get('sort'),
+      [sortOrderParam]: sortOrder(paginator.get('sortReverse'))
+    }
+  }
+
+  return {}
 }
 
 export function translate(paginator) {
@@ -23,6 +70,7 @@ export function translate(paginator) {
     query: {
       [pageParam]: page,
       [pageSizeParam]: pageSize,
+      ...sortParams(paginator),
       ...filters
     }
   }

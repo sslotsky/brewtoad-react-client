@@ -109,6 +109,15 @@ export function register(config) {
           field,
           value
         })
+      ),
+    sort: (field, reverse) => dispatch =>
+      dispatch(
+        execute({
+          type: actionTypes.SORT_CHANGED,
+          id,
+          field,
+          reverse
+        })
       )
   }
 }
