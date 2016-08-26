@@ -1,8 +1,9 @@
 import React, { PropTypes, Component } from 'react'
+import FontAwesome from 'react-fontawesome'
 import paginate from './PaginationWrapper'
 
 export function Prev({ actions, hasPreviousPage }) {
-  const prev = <span>←</span>
+  const prev = <FontAwesome name="chevron-left" />
   const link = hasPreviousPage ? (
     <a onClick={actions.prev}>{prev}</a>
   ) : prev
