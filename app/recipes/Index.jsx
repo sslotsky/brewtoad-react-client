@@ -15,21 +15,31 @@ export class Index extends Component {
     const { actions } = this.props
 
     return (
-      <div>
-        <SortLink
-          listId="recipes"
-          fetch={actions.fetchRecipes}
-          field='name'
-          text='Name'
-        />
-        <SortLink
-          listId="recipes"
-          fetch={actions.fetchRecipes}
-          field='fermentation_temp'
-          text='Fermentation Temperature'
-        />
+      <section>
+        <table className="border">
+          <thead>
+            <tr>
+              <th>
+                <SortLink
+                  listId="recipes"
+                  fetch={actions.fetchRecipes}
+                  field='name'
+                  text='Name'
+                />
+              </th>
+              <th>
+                <SortLink
+                  listId="recipes"
+                  fetch={actions.fetchRecipes}
+                  field='fermentation_temp'
+                  text='Fermentation Temperature'
+                />
+              </th>
+            </tr>
+          </thead>
+        </table>
         <Flipper listId="recipes" fetch={actions.fetchRecipes} />
-      </div>
+      </section>
     )
   }
 }

@@ -5,8 +5,8 @@ import { Prev } from './Prev'
 import { Next } from './Next'
 
 export function Flipper(props) {
-  const prevClasses = classNames({ current: !props.hasPreviousPage })
-  const nextClasses = classNames({ current: !props.hasNextPage })
+  const prevClasses = classNames({ disabled: !props.hasPreviousPage })
+  const nextClasses = classNames({ disabled: !props.hasNextPage })
 
   return (
     <ul className="pagination">
