@@ -2,15 +2,12 @@ import React, { PropTypes, Component } from 'react'
 import paginate from './PaginationWrapper'
 
 export function Prev({ actions, hasPreviousPage }) {
-  return (
-    <a
-      className="pure-button pure-button-primary"
-      onClick={actions.prev}
-      disabled={!hasPreviousPage}
-    >
-      {'<<'}
-    </a>
-  )
+  const prev = <span>←</span>
+  const link = hasPreviousPage ? (
+    <a onClick={actions.prev}>{prev}</a>
+  ) : prev
+
+  return link
 }
 
 export default paginate(Prev)
