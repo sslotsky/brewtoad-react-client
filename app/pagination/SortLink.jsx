@@ -7,7 +7,7 @@ export function SortLink({ paginator, actions, field, text }) {
   const sort = () =>
     actions.sort(field, !paginator.get('sortReverse'))
 
-  const arrow = paginator.get('sort') && (
+  const arrow = paginator.get('sort') === field && (
     paginator.get('sortReverse') ? 'angle-up' : 'angle-down'
   ) || ''
 

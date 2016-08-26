@@ -22,6 +22,12 @@ export class Index extends Component {
           field='name'
           text='Name'
         />
+        <SortLink
+          listId="recipes"
+          fetch={actions.fetchRecipes}
+          field='fermentation_temp'
+          text='Fermentation Temperature'
+        />
         <Flipper listId="recipes" fetch={actions.fetchRecipes} />
       </div>
     )
