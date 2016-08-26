@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react'
 import paginate from './PaginationWrapper'
-import { defaultPaginator } from './reducer'
 import FontAwesome from 'react-fontawesome'
 
 export function SortLink({ paginator, actions, field, text }) {
@@ -16,10 +15,6 @@ export function SortLink({ paginator, actions, field, text }) {
       {text} <FontAwesome name={arrow} />
     </a>
   )
-}
-
-SortLink.defaultProps = {
-  paginator: defaultPaginator
 }
 
 export default paginate(SortLink)
