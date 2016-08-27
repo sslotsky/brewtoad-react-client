@@ -92,6 +92,14 @@ export default function register(config) {
           id
         })
       ),
+    goTo: (page) => dispatch =>
+      dispatch(
+        execute({
+          type: actionTypes.GO_TO_PAGE,
+          id,
+          page
+        })
+      ),
     toggleFilterItem: (field, value) => dispatch =>
       dispatch(
         execute({
