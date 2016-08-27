@@ -1,44 +1,40 @@
 import React, { PropTypes, Component } from 'react'
 import Flipper from 'APP/pagination/Flipper'
 import SortLink from 'APP/pagination/SortLink'
+import DataTable from 'APP/pagination/DataTable'
 
 import * as actions from './actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+
+import { I18n } from 'react-redux-i18n'
 
 export class Index extends Component {
   static propTypes = {
     actions: PropTypes.object.isRequired
   }
 
+  headers() {
+    return [{
+      field: 'name',
+      text: I18n.t('recipes.name')
+    }, {
+      field: 'boil_time',
+      text: I18n.t('recipes.boil_time')
+    }]
+  }
+
   render() {
     const { actions } = this.props
+    const flipper = (
+      <Flipper listId="recipes" fetch={actions.fetchRecipes} />
+    )
 
     return (
       <section>
-        <table className="border">
-          <thead>
-            <tr>
-              <th>
-                <SortLink
-                  listId="recipes"
-                  fetch={actions.fetchRecipes}
-                  field='name'
-                  text='Name'
-                />
-              </th>
-              <th>
-                <SortLink
-                  listId="recipes"
-                  fetch={actions.fetchRecipes}
-                  field='fermentation_temp'
-                  text='Fermentation Temperature'
-                />
-              </th>
-            </tr>
-          </thead>
-        </table>
-        <Flipper listId="recipes" fetch={actions.fetchRecipes} />
+        {flipper}
+        <DataTable listId="recipes" fetch={actions.fetchRecipes} headers={this.headers()} />
+        {flipper}
       </section>
     )
   }
