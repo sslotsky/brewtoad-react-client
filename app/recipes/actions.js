@@ -1,9 +1,9 @@
-import * as actionTypes from './actionTypes'
 import api from 'APP/api'
+import * as actionTypes from './actionTypes'
 
-export function fetchRecipes(pageInfo) {
+export default function fetchRecipes(pageInfo) {
   return dispatch => {
     dispatch({ type: actionTypes.FETCH_RECIPES })
-    return api.recipes.index(pageInfo.query);
+    return api.recipes.index(pageInfo.query)
   }
 }

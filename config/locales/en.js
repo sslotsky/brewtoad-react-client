@@ -12,7 +12,8 @@ export default {
   },
   recipes: {
     name: 'Name',
-    boil_time: 'Boil Time'
+    boil_time: 'Boil Time',
+    created_at: 'Date Created'
   },
   users: {
     form: {

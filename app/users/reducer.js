@@ -1,6 +1,6 @@
 import Immutable, { Map } from 'immutable'
-import * as actionTypes from './actionTypes'
 import { resolveAll } from 'LIB/reduxResolver'
+import * as actionTypes from './actionTypes'
 
 const initialState = Map({
   saving: false,

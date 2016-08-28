@@ -1,19 +1,19 @@
 export default function domProps(field) {
   const {
-    initialValue,
-    autofill,
-    onUpdate,
-    valid,
-    invalid,
-    dirty,
-    pristine,
-    active,
-    touched,
-    visited,
-    autofilled,
-    error,
-    ...domProps
-  } = field;
+    initialValue: _initialValue,
+    autofill: _autofill,
+    onUpdate: _onUpdate,
+    valid: _valid,
+    invalid: _invalid,
+    dirty: _dirty,
+    pristine: _pristine,
+    active: _active,
+    touched: _touched,
+    visited: _visited,
+    autofilled: _autofilled,
+    error: _error,
+    ...validDomProps
+  } = field
 
-  return domProps;
+  return validDomProps
 }

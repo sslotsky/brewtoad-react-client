@@ -1,17 +1,14 @@
 import React, { PropTypes, Component } from 'react'
 import Flipper from 'APP/pagination/Flipper'
-import SortLink from 'APP/pagination/SortLink'
 import DataTable from 'APP/pagination/DataTable'
-
-import * as actions from './actions'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-
 import { I18n } from 'react-redux-i18n'
+
+import fetchRecipes from './actions'
 
 export class Index extends Component {
   static propTypes = {
-    actions: PropTypes.object.isRequired
+    fetch: PropTypes.func.isRequired
   }
 
   headers() {
@@ -19,21 +16,25 @@ export class Index extends Component {
       field: 'name',
       text: I18n.t('recipes.name')
     }, {
+      field: 'created_at',
+      text: I18n.t('recipes.created_at')
+    }, {
       field: 'boil_time',
+      sortable: false,
       text: I18n.t('recipes.boil_time')
     }]
   }
 
   render() {
-    const { actions } = this.props
+    const { fetch } = this.props
     const flipper = (
-      <Flipper listId="recipes" fetch={actions.fetchRecipes} />
+      <Flipper listId="recipes" fetch={fetch} />
     )
 
     return (
       <section>
         {flipper}
-        <DataTable listId="recipes" fetch={actions.fetchRecipes} headers={this.headers()} />
+        <DataTable listId="recipes" fetch={fetch} headers={this.headers()} />
         {flipper}
       </section>
     )
@@ -42,7 +43,5 @@ export class Index extends Component {
 
 export default connect(
   () => ({}),
-  dispatch => ({
-    actions: bindActionCreators(actions, dispatch)
-  })
+  { fetch: fetchRecipes }
 )(Index)

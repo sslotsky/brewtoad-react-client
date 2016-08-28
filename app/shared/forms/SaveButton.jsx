@@ -11,7 +11,7 @@ export default class SaveButton extends Component {
 
   canSubmit() {
     const { dirty, valid } = this.props
-    return dirty && valid;
+    return dirty && valid
   }
 
   render() {

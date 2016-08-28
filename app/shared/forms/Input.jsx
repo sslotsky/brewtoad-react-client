@@ -16,7 +16,7 @@ export default class Input extends Component {
   }
 
   render() {
-    const { field, placeholder, type } = this.props;
+    const { field, placeholder, type } = this.props
 
     return (
       <FormField {...this.props}>

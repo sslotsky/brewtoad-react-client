@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react'
+import React, { PropTypes } from 'react'
 import classNames from 'classnames'
 import paginate from './PaginationWrapper'
 import { Prev } from './Prev'
@@ -18,6 +18,11 @@ export function Flipper(props) {
       </li>
     </ul>
   )
+}
+
+Flipper.propTypes = {
+  hasPreviousPage: PropTypes.bool,
+  hasNextPage: PropTypes.bool
 }
 
 export default paginate(Flipper)

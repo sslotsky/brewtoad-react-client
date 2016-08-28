@@ -58,26 +58,30 @@ function toggleFilterItem(state, action) {
   return updateListItem(state, action.id, p => {
     const items = (p.getIn(['filters', action.field]) || Set()).toSet()
     p.set('page', 1)
-    if (items.includes(action.value)) {
-      return p.setIn(['filters', action.field], items.delete(action.value))
-    } else {
-      return p.setIn(['filters', action.field], items.add(action.value))
-    }
+    return items.includes(action.value) ?
+      p.setIn(['filters', action.field], items.delete(action.value)) :
+      p.setIn(['filters', action.field], items.add(action.value))
   })
 }
 
 function setFilter(state, action) {
   return updateListItem(state, action.id, p =>
-    p.setIn(['filters', action.field], Immutable.fromJS(action.value)).
-      set('page', 1)
+    p.setIn(
+      ['filters', action.field],
+      Immutable.fromJS(action.value)
+    ).set('page', 1)
   )
 }
 
 function sortChanged(state, action) {
   return updateListItem(state, action.id, p =>
-    p.set('sort', action.field).
-      set('sortReverse', action.reverse).
-      set('page', 1)
+    p.set(
+      'sort',
+      action.field
+    ).set(
+      'sortReverse',
+      action.reverse
+    ).set('page', 1)
   )
 }
 

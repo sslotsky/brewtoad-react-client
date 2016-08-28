@@ -8,7 +8,7 @@ function api() {
     timeout: 10000,
     headers: {
       'X-Api-Key': 'b780aac581de488cf77a629517ac999b',
-      'Accept': 'application/json'
+      Accept: 'application/json'
     }
   })
 }
@@ -22,11 +22,10 @@ export default {
           email,
           password
         }
-      }),
+      })
   },
   recipes: {
-    index: (filters={}) => {
-      return api().get('/recipes', { params: { ...filters } })
-    }
+    index: (filters={}) =>
+      api().get('/recipes', { params: { ...filters } })
   }
 }

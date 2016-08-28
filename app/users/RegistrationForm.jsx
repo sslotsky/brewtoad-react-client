@@ -20,17 +20,25 @@ class RegistrationForm extends Component {
         username,
         email,
         password,
-        password_confirmation
+        password_confirmation: passwordConfirmation
       },
       ...rest
     } = this.props
 
     return (
-      <Form {...rest} translationPrefix="users.form" className="pure-form pure-form-stacked pure-form-brewed">
+      <Form
+        {...rest}
+        translationPrefix="users.form"
+        className="pure-form pure-form-stacked pure-form-brewed"
+      >
         <Input field={username} placeholder={this.label(username)} />
         <Input field={email} placeholder={this.label(email)} />
         <Input field={password} type="password" placeholder={this.label(password)} />
-        <Input field={password_confirmation} type="password" placeholder={this.label(password_confirmation)} />
+        <Input
+          field={passwordConfirmation}
+          type="password"
+          placeholder={this.label(passwordConfirmation)}
+        />
         <SaveButton {...this.props} label={I18n.t('users.form.register')} />
       </Form>
     )
@@ -39,10 +47,14 @@ class RegistrationForm extends Component {
 
 function validate(values) {
   return buildErrors(values, v => {
-    v.require('username', 'email', 'password', 'password_confirmation'),
-    v.email('email'),
-    v.matchesField('password_confirmation', 'password', 'users.form.validation.password_confirmation.matches')
-  });
+    v.require('username', 'email', 'password', 'password_confirmation')
+    v.email('email')
+    v.matchesField(
+      'password_confirmation',
+      'password',
+      'users.form.validation.password_confirmation.matches'
+    )
+  })
 }
 
 export default reduxForm({
@@ -54,4 +66,4 @@ export default reduxForm({
     'password_confirmation'
   ],
   validate
-})(RegistrationForm )
+})(RegistrationForm)
