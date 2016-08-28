@@ -56,7 +56,7 @@ const fetcher = customConfig =>
     )
   }
 
-export function register(config) {
+export default function register(config) {
   const fetch = fetcher(config)
   const id = config.listId
   const execute = action => dispatch => {

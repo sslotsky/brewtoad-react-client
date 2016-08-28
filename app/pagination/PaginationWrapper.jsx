@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
-import { register } from './actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import register from './actions'
 import { defaultPaginator } from './reducer'
 
 const connector = connect(

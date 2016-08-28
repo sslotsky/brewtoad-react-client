@@ -1,5 +1,5 @@
 export Form from './Form'
 export Input from './Input'
 export SaveButton from './SaveButton'
-export { buildErrors } from './validation'
+export buildErrors from './validation'
 export { setTranslator, t } from './translations'

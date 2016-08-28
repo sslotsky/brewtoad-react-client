@@ -1,9 +1,9 @@
 import { replace } from 'react-router-redux'
 import { toastr } from 'react-redux-toastr'
-import api from 'APP/api'
+import api from 'ROOT/api'
 import * as actionTypes from './actionTypes'
 
-export function register(username, email, password) {
+export default function register(username, email, password) {
   return dispatch => {
     dispatch({ type: actionTypes.SUBMIT_NEW_USER })
 
@@ -13,7 +13,10 @@ export function register(username, email, password) {
       return dispatch({ type: actionTypes.NEW_USER_CREATED, user: resp.data })
     }).catch(error => {
       toastr.error('Could not create user!')
-      return dispatch({ type: actionTypes.NEW_USER_CREATED_ERROR, serverErrors: error.response.data.errors })
+      return dispatch({
+        type: actionTypes.NEW_USER_CREATED_ERROR,
+        serverErrors: error.response.data.errors
+      })
     })
   }
 }

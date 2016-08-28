@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import { I18n } from 'react-redux-i18n'
 
@@ -14,4 +14,8 @@ export default function App({ children }) {
       {children}
     </div>
   )
+}
+
+App.propTypes = {
+  children: PropTypes.object
 }

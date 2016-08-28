@@ -1,16 +1,15 @@
-import React from 'react'
-import { SortLink } from 'APP/pagination/SortLink'
+import React, { PropTypes } from 'react'
+import { SortLink } from './SortLink'
 import paginate from './PaginationWrapper'
 
-export function DataTable(props) {
-  const { listId, results, actions, headers } = props
+export function VioletDataTable(props) {
+  const { results, headers } = props
 
   const headerRow = headers.map(h =>
     <th key={h.field}>
       <SortLink
         {...props}
-        field={h.field}
-        text={h.text}
+        {...h}
       />
     </th>
   )
@@ -19,7 +18,7 @@ export function DataTable(props) {
     const columns = headers.map(h => {
       const { field, format } = h
       const data = r.get(field)
-      const displayData = format && format(data) || data
+      const displayData = (format && format(data)) || data
 
       return (
         <td key={field}>
@@ -49,4 +48,8 @@ export function DataTable(props) {
   )
 }
 
-export default paginate(DataTable)
+VioletDataTable.propTypes = {
+  headers: PropTypes.array.isRequired,
+  results: PropTypes.object
+}
+export default paginate(VioletDataTable)

@@ -38,7 +38,7 @@ export function configurePageParams({
   useBooleanOrdering = !!sortReverse
 }
 
-function sortOrder(value) {
+function sortDirection(value) {
   if (useBooleanOrdering) {
     return value
   }
@@ -50,7 +50,7 @@ function sortParams(paginator) {
   if (paginator.get('sort')) {
     return {
       [sortParam]: paginator.get('sort'),
-      [sortOrderParam]: sortOrder(paginator.get('sortReverse'))
+      [sortOrderParam]: sortDirection(paginator.get('sortReverse'))
     }
   }
 

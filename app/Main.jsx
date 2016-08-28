@@ -2,21 +2,23 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import thunk from 'redux-thunk'
-import reducers from './reducers'
 import { compose, createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import ReduxToastr from 'react-redux-toastr'
 
 import { Router, browserHistory } from 'react-router'
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
-import routes from './Routes'
-
-import 'ROOT/styles.scss'
 
 import { loadTranslations, setLocale, syncTranslationWithStore, I18n } from 'react-redux-i18n'
-import translations from 'CONFIG/locales'
-import { setTranslator, t } from 'APP/shared/forms'
-import { configurePageParams } from 'APP/pagination/pageInfoTranslator'
+
+import 'styles.scss'
+
+import translations from 'CONF/locales'
+import { setTranslator } from 'ROOT/shared/forms'
+import { configurePageParams } from 'ROOT/pagination/pageInfoTranslator'
+
+import reducers from './reducers'
+import routes from './Routes'
 
 configurePageParams({
   perPage: 'results_per_page',

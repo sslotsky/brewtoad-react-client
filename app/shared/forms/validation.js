@@ -32,7 +32,8 @@ function validate(value, data, handler, ...rules) {
     handler(messages)
   }
 }
-export function buildErrors(values, validations) {
+
+export default function buildErrors(values, validations) {
   const errors = {}
 
   function validateFields(rule, ...fields) {
@@ -46,7 +47,8 @@ export function buildErrors(values, validations) {
   const validator = {
     require: (...fields) => validateFields(required, ...fields),
     email: (...fields) => validateFields(email, ...fields),
-    matchesField: (field, otherField, message) => validateFields(matches(otherField, message), field),
+    matchesField: (field, otherField, message) =>
+      validateFields(matches(otherField, message), field),
     validateChild: (name, childValidations) => {
       errors[name] = buildErrors(values[name], childValidations)
     },

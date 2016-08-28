@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react'
+import React from 'react'
 import FontAwesome from 'react-fontawesome'
 import paginate from './PaginationWrapper'
 

@@ -2,11 +2,11 @@ let translator = {
   t: key => key
 }
 
-let functionName = 't';
+let functionName = 't'
 
-export function setTranslator(t, functionName='t') {
-  translator = t
-  functionName = functionName
+export function setTranslator(translationObject, translateMethod='t') {
+  translator = translationObject
+  functionName = translateMethod
 }
 
 export function t(key) {
