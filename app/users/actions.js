@@ -1,6 +1,6 @@
 import { replace } from 'react-router-redux'
 import { toastr } from 'react-redux-toastr'
-import api from 'APP/api'
+import api from 'ROOT/api'
 import * as actionTypes from './actionTypes'
 
 export default function register(username, email, password) {

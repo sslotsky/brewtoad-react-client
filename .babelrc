@@ -4,9 +4,8 @@
     ["module-resolver", {
       "root": ["./"],
       "alias": {
-        "ROOT": "./",
-        "APP": "./app",
-        "CONFIG": "./config",
+        "ROOT": "./app",
+        "CONF": "./config",
         "LIB": "./lib"
       }
     }]

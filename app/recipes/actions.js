@@ -1,4 +1,4 @@
-import api from 'APP/api'
+import api from 'ROOT/api'
 import * as actionTypes from './actionTypes'
 
 export default function fetchRecipes(pageInfo) {

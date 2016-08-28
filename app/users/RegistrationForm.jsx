@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react'
-import { Input, SaveButton, Form, buildErrors } from 'APP/shared/forms'
+import { Input, SaveButton, Form, buildErrors } from 'ROOT/shared/forms'
 import { I18n } from 'react-redux-i18n'
 import { reduxForm } from 'redux-form'
 

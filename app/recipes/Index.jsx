@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
-import Flipper from 'APP/pagination/Flipper'
-import DataTable from 'APP/pagination/DataTable'
+import Flipper from 'ROOT/pagination/Flipper'
+import DataTable from 'ROOT/pagination/DataTable'
 import { connect } from 'react-redux'
 import { I18n } from 'react-redux-i18n'
 

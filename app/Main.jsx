@@ -11,11 +11,11 @@ import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
 
 import { loadTranslations, setLocale, syncTranslationWithStore, I18n } from 'react-redux-i18n'
 
-import 'ROOT/styles.scss'
+import 'styles.scss'
 
-import translations from 'CONFIG/locales'
-import { setTranslator } from 'APP/shared/forms'
-import { configurePageParams } from 'APP/pagination/pageInfoTranslator'
+import translations from 'CONF/locales'
+import { setTranslator } from 'ROOT/shared/forms'
+import { configurePageParams } from 'ROOT/pagination/pageInfoTranslator'
 
 import reducers from './reducers'
 import routes from './Routes'
