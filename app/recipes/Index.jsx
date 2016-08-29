@@ -1,8 +1,9 @@
 import React, { PropTypes, Component } from 'react'
-import Flipper from 'ROOT/pagination/Flipper'
-import DataTable from 'ROOT/pagination/DataTable'
 import { connect } from 'react-redux'
 import { I18n } from 'react-redux-i18n'
+import Flipper from 'ROOT/pagination/Flipper'
+import DataTable from 'ROOT/pagination/DataTable'
+import Paginator from 'ROOT/pagination/Paginator'
 
 import fetchRecipes from './actions'
 
@@ -33,9 +34,11 @@ export class Index extends Component {
 
     return (
       <section>
+        <Paginator listId="recipes" fetch={fetch} />
         {flipper}
         <DataTable listId="recipes" fetch={fetch} headers={this.headers()} />
         {flipper}
+        <Paginator listId="recipes" fetch={fetch} />
       </section>
     )
   }

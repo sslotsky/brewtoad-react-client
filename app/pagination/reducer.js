@@ -38,6 +38,12 @@ function prev(state, action) {
   )
 }
 
+function goToPage(state, action) {
+  return updateListItem(state, action.id, p =>
+    p.merge({ page: action.page })
+  )
+}
+
 function fetching(state, action) {
   return updateListItem(state, action.id, p =>
     p.merge({ isLoading: true })
@@ -98,6 +104,7 @@ export default resolveEach(initialState, {
   [actionTypes.INITIALIZE_PAGINATOR]: initialize,
   [actionTypes.PREVIOUS_PAGE]: prev,
   [actionTypes.NEXT_PAGE]: next,
+  [actionTypes.GO_TO_PAGE]: goToPage,
   [actionTypes.FETCH_RECORDS]: fetching,
   [actionTypes.RESULTS_UPDATED]: updateResults,
   [actionTypes.RESULTS_UPDATED_ERROR]: error,

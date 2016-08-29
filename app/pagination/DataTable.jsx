@@ -1,9 +1,22 @@
 import React, { PropTypes } from 'react'
+import FontAwesome from 'react-fontawesome'
 import { SortLink } from './SortLink'
 import paginate from './PaginationWrapper'
 
 export function VioletDataTable(props) {
-  const { results, headers } = props
+  const { results, headers, isLoading } = props
+
+  if (isLoading) {
+    return (
+      <center>
+        <FontAwesome
+          name="spinner"
+          spin
+          size="5x"
+        />
+      </center>
+    )
+  }
 
   const headerRow = headers.map(h =>
     <th key={h.field}>
@@ -50,6 +63,7 @@ export function VioletDataTable(props) {
 
 VioletDataTable.propTypes = {
   headers: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool,
   results: PropTypes.object
 }
 export default paginate(VioletDataTable)
