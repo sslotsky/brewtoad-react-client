@@ -100,6 +100,29 @@ function error(state, action) {
   )
 }
 
+function updateItem(state, action) {
+  return updateListItem(state, action.id, p =>
+    p.set(
+      'results',
+      updateListItem(p.get('results'), action.itemId, item =>
+        item.merge(action.data)
+      )
+    )
+  )
+}
+
+function removeItem(state, action) {
+  return updateListItem(state, action.id, p =>
+    p.set(
+      'results',
+      p.get('results').filter(item => item.get('id') !== action.itemId)
+    ).set(
+      'totalCount',
+      p.get('totalCount') - 1
+    )
+  )
+}
+
 export default resolveEach(initialState, {
   [actionTypes.INITIALIZE_PAGINATOR]: initialize,
   [actionTypes.PREVIOUS_PAGE]: prev,
@@ -110,5 +133,7 @@ export default resolveEach(initialState, {
   [actionTypes.RESULTS_UPDATED_ERROR]: error,
   [actionTypes.TOGGLE_FILTER_ITEM]: toggleFilterItem,
   [actionTypes.SET_FILTER]: setFilter,
-  [actionTypes.SORT_CHANGED]: sortChanged
+  [actionTypes.SORT_CHANGED]: sortChanged,
+  [actionTypes.UPDATE_ITEM]: updateItem,
+  [actionTypes.REMOVE_ITEM]: removeItem
 })

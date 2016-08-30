@@ -1,9 +1,10 @@
 import * as actionTypes from './actionTypes'
-import { translate } from './pageInfoTranslator'
+import { translate, responseProps } from './pageInfoTranslator'
+
+const [totalCountProp, resultsProp] = responseProps()
 
 const defaultConfig = {
-  results: 'results',
-  totalCount: 'total_count'
+  isBoundToDispatch: true
 }
 
 const fetcher = customConfig =>
@@ -14,37 +15,15 @@ const fetcher = customConfig =>
 
     dispatch({ type: actionTypes.FETCH_RECORDS, id })
 
-    /* Assumes config.fetch is already bound to dispatch:
-     *
-     *
-     * export class Index extends Component {
-     *   static propTypes = {
-     *     actions: PropTypes.object.isRequired
-     *   }
-     *
-     *   render() {
-     *     const { actions } = this.props
-     *
-     *     return (
-     *       <Flipper listId="recipes" fetch={actions.fetchRecipes} />
-     *     )
-     *   }
-     * }
-     *
-     * export default connect(
-     *   () => ({}),
-     *   dispatch => ({
-     *     actions: bindActionCreators(actions, dispatch)
-     *   })
-     * )(Index)
-     *
-     *
-     */
-    return config.fetch(translate(pageInfo)).then(resp =>
+    const promise = config.isBoundToDispatch ?
+      config.fetch(translate(pageInfo)) :
+      dispatch(config.fetch(translate(pageInfo)))
+
+    return promise.then(resp =>
       dispatch({
         type: actionTypes.RESULTS_UPDATED,
-        results: resp.data[config.results],
-        totalCount: resp.data[config.totalCount],
+        results: resp.data[resultsProp],
+        totalCount: resp.data[totalCountProp],
         id
       })
     ).catch(error =>
@@ -126,6 +105,19 @@ export default function register(config) {
           field,
           reverse
         })
-      )
+      ),
+    updateItem: (itemId, data) => dispatch =>
+      dispatch({
+        type: actionTypes.UPDATE_ITEM,
+        id,
+        itemId,
+        data
+      }),
+    removeItem: (itemId) => dispatch =>
+      dispatch({
+        type: actionTypes.REMOVE_ITEM,
+        id,
+        itemId
+      })
   }
 }

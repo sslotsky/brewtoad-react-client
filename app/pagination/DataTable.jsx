@@ -31,7 +31,7 @@ export function VioletDataTable(props) {
     const columns = headers.map(h => {
       const { field, format } = h
       const data = r.get(field)
-      const displayData = (format && format(data)) || data
+      const displayData = (format && format(r)) || data
 
       return (
         <td key={field}>
