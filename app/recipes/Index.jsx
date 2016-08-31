@@ -1,9 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { I18n } from 'react-redux-i18n'
-import Flipper from 'ROOT/pagination/Flipper'
-import DataTable from 'ROOT/pagination/DataTable'
-import Paginator from 'ROOT/pagination/Paginator'
+import { VioletFlipper, VioletDataTable, VioletPaginator } from 'ROOT/pagination'
 import FontAwesome from 'react-fontawesome'
 
 import fetchRecipes, { forceFetch, toggleActive, removeRecipe } from './actions'
@@ -65,17 +63,17 @@ export class Index extends Component {
   render() {
     const { fetch } = this.props
     const flipper = (
-      <Flipper listId="recipes" fetch={fetch} />
+      <VioletFlipper listId="recipes" fetch={fetch} />
     )
 
     return (
       <section>
         <button onClick={() => this.forceFetch()}>Force Fetch</button>
-        <Paginator listId="recipes" fetch={fetch} />
+        <VioletPaginator listId="recipes" fetch={fetch} />
         {flipper}
-        <DataTable listId="recipes" fetch={fetch} headers={this.headers()} />
+        <VioletDataTable listId="recipes" fetch={fetch} headers={this.headers()} />
         {flipper}
-        <Paginator listId="recipes" fetch={fetch} />
+        <VioletPaginator listId="recipes" fetch={fetch} />
       </section>
     )
   }

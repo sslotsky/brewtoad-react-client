@@ -3,7 +3,7 @@ import FontAwesome from 'react-fontawesome'
 import { SortLink } from './SortLink'
 import paginate from './PaginationWrapper'
 
-export function VioletDataTable(props) {
+export function DataTable(props) {
   const { results, headers, isLoading } = props
 
   if (isLoading) {
@@ -61,9 +61,10 @@ export function VioletDataTable(props) {
   )
 }
 
-VioletDataTable.propTypes = {
+DataTable.propTypes = {
   headers: PropTypes.array.isRequired,
   isLoading: PropTypes.bool,
   results: PropTypes.object
 }
-export default paginate(VioletDataTable)
+
+export default paginate(DataTable)

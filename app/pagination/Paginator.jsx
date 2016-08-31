@@ -8,7 +8,7 @@ import { PageLink } from './PageLink'
 import { Prev } from './Prev'
 import { Next } from './Next'
 
-export function VioletPaginator(props) {
+export function Paginator(props) {
   const { currentPage, totalPages, hasPreviousPage, hasNextPage } = props
 
   const upperOffset = Math.max(0, (currentPage - totalPages) + 3)
@@ -62,11 +62,11 @@ export function VioletPaginator(props) {
   )
 }
 
-VioletPaginator.propTypes = {
+Paginator.propTypes = {
   currentPage: PropTypes.number,
   totalPages: PropTypes.number,
   hasPreviousPage: PropTypes.bool,
   hasNextPage: PropTypes.bool
 }
 
-export default paginate(VioletPaginator)
+export default paginate(Paginator)

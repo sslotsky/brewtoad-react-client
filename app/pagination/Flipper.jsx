@@ -4,7 +4,7 @@ import paginate from './PaginationWrapper'
 import { Prev } from './Prev'
 import { Next } from './Next'
 
-export function VioletFlipper(props) {
+export function Flipper(props) {
   const prevClasses = classNames({ disabled: !props.hasPreviousPage })
   const nextClasses = classNames({ disabled: !props.hasNextPage })
 
@@ -20,9 +20,9 @@ export function VioletFlipper(props) {
   )
 }
 
-VioletFlipper.propTypes = {
+Flipper.propTypes = {
   hasPreviousPage: PropTypes.bool,
   hasNextPage: PropTypes.bool
 }
 
-export default paginate(VioletFlipper)
+export default paginate(Flipper)
