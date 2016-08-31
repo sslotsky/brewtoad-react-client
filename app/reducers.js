@@ -5,7 +5,7 @@ import { i18nReducer } from 'react-redux-i18n'
 import { combineReducers } from 'redux'
 
 import users from './users/reducer'
-import pagination from './pagination/reducer'
+import { pagination } from 'violet-paginator'
 
 export default combineReducers({
   users,

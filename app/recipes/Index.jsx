@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { I18n } from 'react-redux-i18n'
-import { VioletFlipper, VioletDataTable, VioletPaginator } from 'ROOT/pagination'
+import { VioletFlipper, VioletDataTable, VioletPaginator } from 'violet-paginator'
 import FontAwesome from 'react-fontawesome'
 
 import fetchRecipes, { forceFetch, toggleActive, removeRecipe } from './actions'

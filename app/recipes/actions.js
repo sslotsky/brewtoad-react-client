@@ -1,5 +1,5 @@
 import api from 'ROOT/api'
-import { register } from 'ROOT/pagination'
+import { register } from 'violet-paginator'
 import * as actionTypes from './actionTypes'
 
 export default function fetchRecipes(pageInfo) {
