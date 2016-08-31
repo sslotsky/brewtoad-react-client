@@ -15,7 +15,7 @@ import 'styles.scss'
 
 import translations from 'CONF/locales'
 import { setTranslator } from 'ROOT/shared/forms'
-import { configurePageParams } from 'ROOT/pagination/pageInfoTranslator'
+import { configurePageParams } from 'violet-paginator'
 
 import reducers from './reducers'
 import routes from './Routes'
