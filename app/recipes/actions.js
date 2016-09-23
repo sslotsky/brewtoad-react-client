@@ -1,5 +1,5 @@
 import api from 'ROOT/api'
-import { register } from 'violet-paginator'
+import { composables } from 'violet-paginator'
 import * as actionTypes from './actionTypes'
 
 export default function fetchRecipes(pageInfo) {
@@ -9,14 +9,17 @@ export default function fetchRecipes(pageInfo) {
   }
 }
 
-const pageActions = register({
+const pageActions = composables({
   listId: 'recipes',
-  fetch: fetchRecipes,
-  isBoundToDispatch: false
+  fetch: fetchRecipes
 })
 
 export function forceFetch() {
-  return pageActions.reload
+  return pageActions.reload()
+}
+
+export function expireList() {
+  return pageActions.expire()
 }
 
 export function toggleActive(recipe) {
