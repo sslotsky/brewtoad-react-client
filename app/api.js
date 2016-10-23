@@ -17,6 +17,7 @@ export default {
   sessions: {
     create: (username, password) =>
       api().post('/users/authenticate', {
+        user_agent: navigator.userAgent,
         username,
         password
       })
@@ -34,7 +35,7 @@ export default {
   recipes: {
     index: (filters={}) =>
       api().get('/recipes', { params: { ...filters } }),
-    update: (data) =>
-      Promise.resolve(data)
+    show: (id) =>
+      api().get(`/recipes/${id}`)
   }
 }

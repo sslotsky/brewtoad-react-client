@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { I18n } from 'react-redux-i18n'
 import { VioletFlipper, VioletDataTable, VioletPaginator, VioletPageSizeDropdown } from 'violet-paginator'
 import FontAwesome from 'react-fontawesome'
+import { Link } from 'react-router'
 import Expire from './Expire'
 import * as things from 'violet-paginator'
 
@@ -26,6 +27,14 @@ export class Index extends Component {
     )
   }
 
+  nameColumn(recipe) {
+    return (
+      <Link to={`/recipes/${recipe.get('id')}`}>
+        {recipe.get('name')}
+      </Link>
+    )
+  }
+
   deleteRecipe(recipe) {
     return (
       <a onClick={() => this.props.remove(recipe)}>
@@ -37,7 +46,8 @@ export class Index extends Component {
   headers() {
     return [{
       field: 'name',
-      text: I18n.t('recipes.name')
+      text: I18n.t('recipes.name'),
+      format: (recipe) => this.nameColumn(recipe)
     }, {
       field: 'created_at',
       text: I18n.t('recipes.created_at')
