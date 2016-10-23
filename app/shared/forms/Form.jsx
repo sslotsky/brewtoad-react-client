@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Map } from 'immutable'
+import { Map, List } from 'immutable'
 
 export default function Form({
   handleSubmit,
@@ -21,8 +21,8 @@ export default function Form({
 
 Form.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  children: PropTypes.array.isRequired,
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
   className: PropTypes.string,
-  serverErrors: PropTypes.object,
+  serverErrors: PropTypes.instanceOf(List),
   translationPrefix: PropTypes.string
 }

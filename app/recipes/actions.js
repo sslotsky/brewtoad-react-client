@@ -14,22 +14,20 @@ const pageActions = composables({
   fetch: fetchRecipes
 })
 
-export function forceFetch() {
-  return pageActions.reload()
+export function toggleActive(recipe) {
+  const data = {
+    active: !recipe.get('active')
+  }
+
+  return pageActions.updateAsync(
+    recipe.get('id'),
+    data,
+    () => api.recipes.update(data)
+  )
 }
 
 export function expireList() {
   return pageActions.expire()
-}
-
-export function toggleActive(recipe) {
-  return dispatch =>
-    dispatch(
-      pageActions.updateItem(
-        recipe.get('id'),
-        { active: !recipe.get('active') }
-      )
-    )
 }
 
 export function removeRecipe(recipe) {

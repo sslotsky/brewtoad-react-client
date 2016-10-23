@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { I18n } from 'react-redux-i18n'
 import { VioletFlipper, VioletDataTable, VioletPaginator, VioletPageSizeDropdown } from 'violet-paginator'
 import FontAwesome from 'react-fontawesome'
+import Expire from './Expire'
 import * as things from 'violet-paginator'
 
 import fetchRecipes, { forceFetch, toggleActive, removeRecipe, expireList } from './actions'
@@ -10,7 +11,6 @@ import fetchRecipes, { forceFetch, toggleActive, removeRecipe, expireList } from
 export class Index extends Component {
   static propTypes = {
     fetch: PropTypes.func.isRequired,
-    reload: PropTypes.func.isRequired,
     toggle: PropTypes.func.isRequired,
     remove: PropTypes.func.isRequired,
     expire: PropTypes.func.isRequired
@@ -58,10 +58,6 @@ export class Index extends Component {
     }]
   }
 
-  forceFetch() {
-    this.props.reload()
-  }
-
   expire() {
     this.props.expire()
   }
@@ -74,8 +70,7 @@ export class Index extends Component {
 
     return (
       <section>
-        <button onClick={() => this.forceFetch()}>Force Fetch</button>
-        <button onClick={() => this.expire()}>Expire</button>
+        <Expire />
         <VioletPageSizeDropdown listId="recipes" fetch={fetch} />
         <VioletPaginator listId="recipes" fetch={fetch} />
         {flipper}
@@ -89,5 +84,5 @@ export class Index extends Component {
 
 export default connect(
   () => ({}),
-  { fetch: fetchRecipes, reload: forceFetch, toggle: toggleActive, remove: removeRecipe, expire: expireList }
+  { fetch: fetchRecipes, toggle: toggleActive, remove: removeRecipe, expire: expireList }
 )(Index)

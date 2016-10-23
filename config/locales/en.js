@@ -1,6 +1,7 @@
 export default {
   home: {
     obey: 'Obey the Toad',
+    sign_in: 'Sign In',
     home: 'Home',
     new_user: 'Create New User',
     recipes: 'Recipes',
@@ -14,6 +15,11 @@ export default {
     name: 'Name',
     boil_time: 'Boil Time',
     created_at: 'Date Created'
+  },
+  sign_in: {
+    submit: "Sign In",
+    username: "Username",
+    password: "Password"
   },
   users: {
     form: {

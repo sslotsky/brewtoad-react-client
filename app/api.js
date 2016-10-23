@@ -14,6 +14,13 @@ function api() {
 }
 
 export default {
+  sessions: {
+    create: (username, password) =>
+      api().post('/users/authenticate', {
+        username,
+        password
+      })
+  },
   users: {
     create: (username, email, password) =>
       api().post('/users', {
@@ -26,6 +33,8 @@ export default {
   },
   recipes: {
     index: (filters={}) =>
-      api().get('/recipes', { params: { ...filters } })
+      api().get('/recipes', { params: { ...filters } }),
+    update: (data) =>
+      Promise.resolve(data)
   }
 }

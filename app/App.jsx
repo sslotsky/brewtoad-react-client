@@ -6,6 +6,8 @@ export default function App({ children }) {
   return (
     <div>
       <h1>{I18n.t('home.obey')}</h1>
+      <Link to="/session/new">{I18n.t('home.sign_in')}</Link>
+      &nbsp;
       <Link to="/users/new">{I18n.t('home.new_user')}</Link>
       &nbsp;
       <Link to="/">{I18n.t('home.home')}</Link>
