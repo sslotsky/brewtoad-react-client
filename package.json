@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha 'app/**/*.spec.js' --compilers js:babel-register --recursive",
     "start": "webpack-dev-server --progress --colors -w",
-    "lint": "eslint ./app/** --ext=js,jsx"
+    "lint": "eslint ./app/** --ext=js,jsx",
+    "test": "npm run lint"
   },
   "author": "",
   "license": "MIT",
