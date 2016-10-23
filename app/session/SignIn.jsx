@@ -1,11 +1,11 @@
 import { List } from 'immutable'
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Input, SaveButton, Form } from 'ROOT/shared/forms'
 import { I18n } from 'react-redux-i18n'
 import { reduxForm } from 'redux-form'
 
-export function SignIn(props) {
-  const { fields, authenticate, handleSubmit, ...rest } = props
+export function SignInForm(props) {
+  const { fields, handleSubmit, ...rest } = props
 
   return (
     <Form
@@ -24,7 +24,15 @@ export function SignIn(props) {
       />
       <SaveButton {...rest} label={I18n.t('sign_in.submit')} />
     </Form>
-  );
+  )
+}
+
+SignInForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  fields: PropTypes.shape({
+    username: PropTypes.object,
+    password: PropTypes.object
+  }).isRequired
 }
 
 export default reduxForm({
@@ -33,4 +41,4 @@ export default reduxForm({
     'username',
     'password'
   ]
-})(SignIn)
+})(SignInForm)

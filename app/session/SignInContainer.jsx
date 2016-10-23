@@ -1,22 +1,23 @@
-import React, { Component } from 'react'
+import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import * as actions from './actions'
+import authenticate from './actions'
 import SignIn from './SignIn'
 
-export class SignInContainer extends Component {
-  render() {
-    const { authenticate } = this.props
-    const onSubmit = (data) => {
-      authenticate(data.username, data.password)
-    }
-
-    return (
-      <SignIn onSubmit={onSubmit} />
-    )
+export function SignInContainer({ login }) {
+  const onSubmit = (data) => {
+    login(data.username, data.password)
   }
+
+  return (
+    <SignIn onSubmit={onSubmit} />
+  )
+}
+
+SignInContainer.propTypes = {
+  login: PropTypes.func.isRequired
 }
 
 export default connect(
   () => ({}),
-  { authenticate: actions.authenticate }
+  { login: authenticate }
 )(SignInContainer)

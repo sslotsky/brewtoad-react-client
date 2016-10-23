@@ -1,20 +1,20 @@
 import axios from 'axios'
 import PubSub from 'pubsub-js'
 
-const API_BASE = 'http://localhost:3002/v1'; 'https://brewed-dev.herokuapp.com/v1'
+const API_BASE = 'https://brewed-dev.herokuapp.com/v1'
 
 function api() {
-  const api = axios.create({
+  const adapter = axios.create({
     baseURL: API_BASE,
     timeout: 10000,
     withCredentials: true,
     headers: {
-      'X-Api-Key': 'b556aabb87e0026958adaec15a655028',// 'b780aac581de488cf77a629517ac999b',
+      'X-Api-Key': 'b780aac581de488cf77a629517ac999b',
       Accept: 'application/json'
     }
   })
 
-  api.interceptors.response.use(
+  adapter.interceptors.response.use(
     undefined,
     (error) => {
       if (error.response.status === 403) {
@@ -25,7 +25,7 @@ function api() {
     }
   )
 
-  return api
+  return adapter
 }
 
 export default {

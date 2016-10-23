@@ -1,30 +1,19 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
 import { I18n } from 'react-redux-i18n'
-import { VioletFlipper, VioletDataTable, VioletPaginator, VioletPageSizeDropdown } from 'violet-paginator'
-import FontAwesome from 'react-fontawesome'
+import {
+  VioletFlipper,
+  VioletDataTable,
+  VioletPaginator,
+  VioletPageSizeDropdown
+} from 'violet-paginator'
 import { Link } from 'react-router'
-import Expire from './Expire'
-import * as things from 'violet-paginator'
 
-import fetchRecipes, { forceFetch, toggleActive, removeRecipe, expireList } from './actions'
+import fetchRecipes from './actions'
 
 export class Index extends Component {
   static propTypes = {
-    fetch: PropTypes.func.isRequired,
-    toggle: PropTypes.func.isRequired,
-    remove: PropTypes.func.isRequired,
-    expire: PropTypes.func.isRequired
-  }
-
-  activeColumn(recipe) {
-    return (
-      <input
-        type="checkbox"
-        checked={!!recipe.get('active')}
-        onClick={() => this.props.toggle(recipe)}
-      />
-    )
+    fetch: PropTypes.func.isRequired
   }
 
   nameColumn(recipe) {
@@ -32,14 +21,6 @@ export class Index extends Component {
       <Link to={`/recipes/${recipe.get('id')}`}>
         {recipe.get('name')}
       </Link>
-    )
-  }
-
-  deleteRecipe(recipe) {
-    return (
-      <a onClick={() => this.props.remove(recipe)}>
-        <FontAwesome name="remove" />
-      </a>
     )
   }
 
@@ -55,21 +36,7 @@ export class Index extends Component {
       field: 'boil_time',
       sortable: false,
       text: I18n.t('recipes.boil_time')
-    }, {
-      field: 'active',
-      sortable: false,
-      text: 'Active',
-      format: (recipe) => this.activeColumn(recipe)
-    }, {
-      field: 'delete',
-      sortable: false,
-      text: 'Delete',
-      format: (recipe) => this.deleteRecipe(recipe)
     }]
-  }
-
-  expire() {
-    this.props.expire()
   }
 
   render() {
@@ -80,7 +47,6 @@ export class Index extends Component {
 
     return (
       <section>
-        <Expire />
         <VioletPageSizeDropdown listId="recipes" fetch={fetch} />
         <VioletPaginator listId="recipes" fetch={fetch} />
         {flipper}
@@ -94,5 +60,5 @@ export class Index extends Component {
 
 export default connect(
   () => ({}),
-  { fetch: fetchRecipes, toggle: toggleActive, remove: removeRecipe, expire: expireList }
+  { fetch: fetchRecipes }
 )(Index)

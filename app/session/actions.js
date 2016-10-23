@@ -3,7 +3,7 @@ import { toastr } from 'react-redux-toastr'
 import api from 'ROOT/api'
 import * as actionTypes from './actionTypes'
 
-export function authenticate(username, password) {
+export default function authenticate(username, password) {
   return dispatch => {
     dispatch({ type: actionTypes.AUTHENTICATE })
 

@@ -3,9 +3,9 @@ import { reducer as form } from 'redux-form'
 import { reducer as toastr } from 'react-redux-toastr'
 import { i18nReducer } from 'react-redux-i18n'
 import { combineReducers } from 'redux'
+import { pagination } from 'violet-paginator'
 
 import users from './users/reducer'
-import { pagination } from 'violet-paginator'
 
 export default combineReducers({
   users,
