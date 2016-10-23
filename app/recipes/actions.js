@@ -10,7 +10,7 @@ export default function fetchRecipes(pageInfo) {
 }
 
 export function fetchRecipe(id) {
-  return dispatch => api.recipes.show(id)
+  return dispatch => api.recipes.show(id).catch(() => {})
 }
 
 const pageActions = composables({

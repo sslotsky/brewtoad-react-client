@@ -4,10 +4,11 @@ import ReactDOM from 'react-dom'
 import thunk from 'redux-thunk'
 import { compose, createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
-import ReduxToastr from 'react-redux-toastr'
+import ReduxToastr, { toastr } from 'react-redux-toastr'
+import PubSub from 'pubsub-js'
 
 import { Router, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux'
+import { syncHistoryWithStore, routerMiddleware, push } from 'react-router-redux'
 
 import { loadTranslations, setLocale, syncTranslationWithStore, I18n } from 'react-redux-i18n'
 
@@ -38,6 +39,11 @@ syncTranslationWithStore(store)
 store.dispatch(loadTranslations(translations))
 store.dispatch(setLocale('en')) // TODO: resolve dynamically
 setTranslator(I18n)
+
+PubSub.subscribe('session.expired', () => {
+  store.dispatch(push('/session/new'))
+  toastr.error('Please Sign In')
+})
 
 ReactDOM.render((
   <Provider store={store}>
